@@ -89,6 +89,11 @@ jobs:
         endpoint: https://api.beemerbenzbentley.site/sigma/api/v1/logs/github
         token: none
 
+    - name: Move Docker layer cache
+      run: |
+        rm -rf /tmp/.buildx-cache
+        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
     # 🚀 Push ONLY required tags
     - name: Push Docker image to ECR
       uses: ./.github/actions/log-streamer
