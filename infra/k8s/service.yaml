@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: proud-albattani-f1119e3682-srv
+  namespace: apps-release
+spec:
+  selector:
+    app: proud-albattani-f1119e3682
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 7070
+  type: ClusterIP

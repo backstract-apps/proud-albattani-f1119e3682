@@ -1,0 +1,24 @@
+kind: HTTPScaledObject
+apiVersion: http.keda.sh/v1alpha1
+metadata:
+  name: proud-albattani-f1119e3682-scaler
+  namespace: apps-release
+spec:
+  hosts:
+    - cc1fbde45ead-in-south-01.mayson.dev
+  pathPrefixes:
+    - /us-west-1-backstractelb-8dfbcd-coll-bf8a333f297a411c9473f5178a2bfef0/ # e.g. /infallible-naveen-... proud-albattani-f1119e3682/
+  scaleTargetRef:
+    name: proud-albattani-f1119e3682-depl
+    kind: Deployment
+    apiVersion: apps/v1
+    service: proud-albattani-f1119e3682-srv # e.g. coll-8a2a...-srv
+    port: 80
+  replicas:
+    min: 0
+    max: 10
+  scaledownPeriod: 120 #inseconds
+  scalingMetric:
+    requestRate:
+      targetValue: 100
+      window: 1m
